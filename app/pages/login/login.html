@@ -1,0 +1,14 @@
+<ActionBar class="action-bar" title="Registration"></ActionBar>
+<ScrollView>
+<StackLayout class="form" #formControls>
+    <Image src="res://logo_welcm" stretch="none" horizontalAlignment="center"></Image>
+	<TextField #email="ngModel" class="input input-border" hint="Email Address" [(ngModel)]="user.email" keyboardType="email"  autocorrect="false" autocapitalizationType="none" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required></TextField>
+		<Label class="label error" *ngIf="email.errors && (email.dirty || email.touched) && email.errors.required" text="-An email is required -"></Label>
+		<Label class="label error" *ngIf="email.errors && email.errors.pattern" text="- Invalid Email -"></Label>
+
+	<TextField #password="ngModel" class="input input-border" hint="Password" minlength="6" secure="true" [(ngModel)]="user.password" required></TextField>
+		<Label class="label error" *ngIf="password.errors && (password.dirty || password.touched) && password.errors.required " text="-  Please enter password-"></Label>
+		<Label class="label error" *ngIf="password.errors && password.errors.minlength" text="-Must be at least 6 characters long-"></Label>
+    <Button *ngIf="email.valid && password.valid" text="Register"  (tap)="submit()" ></Button>
+ </StackLayout>
+ </ScrollView>
